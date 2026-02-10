@@ -218,4 +218,4 @@ for i in range(1, 5):
 
         st.write(f"Skill {i}")
         st.write(f"- Sebelum Menggunakan Item → Power: {base_power} | Cooldown: {base_cd}")
-        st.write(f"- Setelah Mengguankan Item → Power: {final_power} | Cooldown: {final_cd:.2f} ")
+        st.write(f"- Setelah Menggunakan Item → Power: {final_power} | Cooldown: {final_cd:.2f} ")
