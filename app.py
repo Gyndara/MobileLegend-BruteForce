@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# ======================
-# LOAD DATA
-# ======================
+
 heroMage = pd.read_excel('data/hero_mage.xlsx')
 magicItem = pd.read_excel('data/item_magic.xlsx')
 
@@ -22,9 +20,6 @@ speed_item = magicItem['attack speed'].tolist()
 
 jumlah_item = len(nama_item)
 
-# ======================
-# LIMIT
-# ======================
 limitSpeed = 20
 
 if (hero_type == 'burst'):
@@ -34,16 +29,12 @@ elif (hero_type == 'cd'):
 else:
     limitCd = 25
 
-# ======================
-# BEST RESULT
-# ======================
+
 bestCombo = ["", "", ""]
 bestCd = -1
 bestPower = -1
 
-# ======================
-# BASIC ATTACK HERO
-# ======================
+
 if (hero_attack_type == 'basic attack'):
 
     for i in range(jumlah_item):
