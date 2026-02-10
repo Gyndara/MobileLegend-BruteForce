@@ -175,8 +175,20 @@ if os.path.exists(hero_image_path):
 else:
     st.warning("Foto hero tidak ditemukan")
 
+
 st.write('kombinasi item terpilih :')
 
 for item in bestCombo:
-    st.write('-', item)
+    col_img, col_text = st.columns([1, 10])
 
+    item_filename = item.lower().replace(" ", "_") + ".png"
+    item_image_path = f"img/items/{item_filename}"
+
+    with col_img:
+        if os.path.exists(item_image_path):
+            st.image(item_image_path, width=45)
+        else:
+            st.write("")
+
+    with col_text:
+        st.write(item)
