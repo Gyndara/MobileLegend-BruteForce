@@ -45,16 +45,21 @@ for i in range(jumlah_item):
     total_power = power_item[i]
     total_speed = speed_item[i]
 
-    if (hero_attack_type == 'basic attack'):
-        if (total_speed > 0) and (total_speed <= limitSpeed):
-            if (bestItemCount < 1) or (total_speed > bestSpeed) or (total_speed == bestSpeed) and (total_power > bestPower):
+    if hero_attack_type == 'basic attack':
+        if (
+            total_speed > 0 and
+            total_speed <= limitSpeed
+        ):
+            if (
+                bestItemCount < 1 or
+                total_speed > bestSpeed or
+                (total_speed == bestSpeed and total_power > bestPower)
+            ):
                 bestItemCount = 1
                 bestCd = total_cd
                 bestPower = total_power
                 bestSpeed = total_speed
                 bestCombo[0] = nama_item[i]
-                bestCombo[1] = ""
-                bestCombo[2] = ""
 
     elif (hero_attack_type == 'skill'):
         if (total_speed == 0) and (total_cd <= limitCd):
@@ -76,16 +81,24 @@ for i in range(jumlah_item):
         speed_i = speed_item[i]
         speed_j = speed_item[j]
 
-        if (hero_attack_type == 'basic attack'):
-            if (speed_i > 0) and (speed_j == 0) and (total_cd <= limitCd):
-                if (bestItemCount < 2) or (total_cd > bestCd) or (total_cd == bestCd) and (total_power > bestPower):
+        if hero_attack_type == 'basic attack':
+            if (
+                speed_i > 0 and
+                speed_j == 0      
+            ):
+                cd_ok = (bestCd < limitCd) and (total_cd <= limitCd)
+        
+                if (
+                    bestItemCount < 2 or
+                    (cd_ok and total_cd > bestCd) or
+                    (not cd_ok and total_power > bestPower)
+                ):
                     bestItemCount = 2
-                    bestCd = total_cd
+                    bestCd = total_cd if cd_ok else bestCd
                     bestPower = total_power
                     bestSpeed = speed_i
                     bestCombo[0] = nama_item[i]
                     bestCombo[1] = nama_item[j]
-                    bestCombo[2] = ""
 
         elif (hero_attack_type == 'skill'):
             if (speed_i == 0) and (speed_j == 0) and (total_cd <= limitCd):
@@ -110,14 +123,20 @@ for i in range(jumlah_item):
             speed_k = speed_item[k]
 
             if hero_attack_type == 'basic attack':
-                if (speed_i > 0) and (speed_j == 0) and (speed_k == 0) and (total_cd <= limitCd) or (cd_item[j] == 0 and cd_item[k] == 0 ):
+                if (
+                    speed_i > 0 and
+                    speed_j == 0 and
+                    speed_k == 0
+                ):
+                    cd_ok = (bestCd < limitCd) and (total_cd <= limitCd)
+
                     if (
                         bestItemCount < 3 or
-                        total_cd > bestCd or
-                        (total_cd == bestCd and total_power > bestPower)
+                        (cd_ok and total_cd > bestCd) or
+                        (not cd_ok and total_power > bestPower)
                     ):
                         bestItemCount = 3
-                        bestCd = total_cd
+                        bestCd = total_cd if cd_ok else bestCd
                         bestPower = total_power
                         bestSpeed = speed_i
                         bestCombo[0] = nama_item[i]
