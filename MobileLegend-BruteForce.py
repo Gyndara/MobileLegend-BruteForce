@@ -194,7 +194,7 @@ for item in bestCombo:
         st.write(item)
 
 st.divider()
-st.write('Detail Skill Setelah Item')
+st.write('Detail Skill Setelah Menggunakan Item')
 
 final_s1_power = hero['skill1power'] + bestPower
 final_s1_cd = hero['skill1cd'] * (1 - bestCd / 100)
