@@ -192,3 +192,27 @@ for item in bestCombo:
 
     with col_text:
         st.write(item)
+
+st.divider()
+st.write('Detail Skill Setelah Item')
+
+final_s1_power = hero['skill1power'] + bestPower
+final_s1_cd = hero['skill1cd'] * (1 - bestCd / 100)
+
+st.write(
+    f"Skill 1 | Power : {final_s1_power} | Cooldown : {final_s1_cd:.2f} detik"
+)
+
+final_s2_power = hero['skill2power'] + bestPower
+final_s2_cd = hero['skill2cd'] * (1 - bestCd / 100)
+
+st.write(
+    f"Skill 2 | Power : {final_s2_power} | Cooldown : {final_s2_cd:.2f} detik"
+)
+
+final_s3_power = hero['skill3power'] + bestPower
+final_s3_cd = hero['skill3cd'] * (1 - bestCd / 100)
+
+st.write(
+    f"Skill 3 | Power : {final_s3_power} | Cooldown : {final_s3_cd:.2f} detik"
+)
