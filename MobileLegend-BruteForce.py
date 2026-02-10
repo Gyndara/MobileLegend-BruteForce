@@ -83,8 +83,8 @@ for i in range(jumlah_item):
 
         if hero_attack_type == 'basic attack':
             if (
-                speed_i > 0 and
-                speed_j == 0      
+                speed_i + speed_j > 0 and
+                speed_i + speed_j <= limitSpeed
             ):
                 cd_ok = (bestCd < limitCd) and (total_cd <= limitCd)
         
@@ -123,10 +123,11 @@ for i in range(jumlah_item):
             speed_k = speed_item[k]
 
             if hero_attack_type == 'basic attack':
+                total_speed = speed_i + speed_j + speed_k
+
                 if (
-                    speed_i > 0 and
-                    speed_j == 0 and
-                    speed_k == 0
+                    total_speed > 0 and
+                    total_speed <= limitSpeed
                 ):
                     cd_ok = (bestCd < limitCd) and (total_cd <= limitCd)
 
