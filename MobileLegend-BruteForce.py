@@ -196,23 +196,26 @@ for item in bestCombo:
 st.divider()
 st.write('Detail Skill Setelah Menggunakan Item')
 
-final_s1_power = hero['skill1power'] + bestPower
-final_s1_cd = hero['skill1cd'] * (1 - bestCd / 100)
+for i in range(1, 5):
+    power_col = f'skill{i}power'
+    cd_col = f'skill{i}cd'
 
-st.write(
-    f"Skill 1 | Power : {final_s1_power} | Cooldown : {final_s1_cd:.2f} detik"
-)
+    if power_col in hero and cd_col in hero:
+        base_power = hero[power_col]
+        base_cd = hero[cd_col]
 
-final_s2_power = hero['skill2power'] + bestPower
-final_s2_cd = hero['skill2cd'] * (1 - bestCd / 100)
+        if pd.isna(base_power) or pd.isna(base_cd):
+            continue
+        if base_power == 0 and base_cd == 0:
+            continue
 
-st.write(
-    f"Skill 2 | Power : {final_s2_power} | Cooldown : {final_s2_cd:.2f} detik"
-)
+        if base_power > 0:
+            final_power = base_power + bestPower
+        else:
+            final_power = base_power
 
-final_s3_power = hero['skill3power'] + bestPower
-final_s3_cd = hero['skill3cd'] * (1 - bestCd / 100)
+        final_cd = base_cd * (1 - bestCd / 100)
 
-st.write(
-    f"Skill 3 | Power : {final_s3_power} | Cooldown : {final_s3_cd:.2f} detik"
-)
+        st.write(f"Skill {i}")
+        st.write(f"- Sebelum Menggunakan Item → Power: {base_power} | Cooldown: {base_cd}")
+        st.write(f"- Setelah Mengguankan Item → Power: {final_power} | Cooldown: {final_cd:.2f} ")
