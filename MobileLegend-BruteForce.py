@@ -1,7 +1,9 @@
 import streamlit as st
 from streamlit_folium import st_folium
 import pandas as pd
-import matplotlib.pyplot as plt
+from PIL import Image
+import os
+import base64
 
 heroMage = pd.read_excel('data/hero_mage.xlsx')
 magicItem = pd.read_excel('data/item_magic.xlsx')
@@ -157,7 +159,24 @@ for i in range(jumlah_item):
 
 st.write('Hero :', selected_hero)
 
+hero_filename = selected_hero.lower().replace(" ", "_") + ".png"
+hero_image_path = f"img/{hero_filename}"
+
+
+if os.path.exists(hero_image_path):
+    st.markdown(
+        f"""
+        <div style="display:flex; justify-content:center;">
+            <img src="data:image/png;base64,{base64.b64encode(open(hero_image_path, "rb").read()).decode()}" width="145">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+else:
+    st.warning("Foto hero tidak ditemukan")
+
 st.write('kombinasi item terpilih :')
 
 for item in bestCombo:
     st.write('-', item)
+
